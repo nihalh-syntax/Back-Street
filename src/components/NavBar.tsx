@@ -1,7 +1,7 @@
 import { ChevronDown, Search, ShoppingCart, User } from "lucide-react"
 
 const navLinkClass =
-  "text-foreground hover:text-foreground/80 transition-colors text-sm font-medium whitespace-nowrap"
+  "text-foreground hover:text-foreground/90 transition-colors text-sm font-medium whitespace-nowrap"
 
 const NavBar = () => {
   return (
@@ -9,10 +9,10 @@ const NavBar = () => {
       <div className="mx-auto flex max-w-7xl items-center gap-6 px-4 py-3 md:gap-8 md:px-6">
         <div className="flex shrink-0 items-center gap-6 md:gap-8">
           <a href="/" className="text-lg font-bold tracking-tight text-foreground md:text-xl">
-            Back.Street
+            BackStreet
           </a>
           <nav
-            className="hidden items-center gap-5 text-sm sm:flex md:gap-6"
+            className="hidden items-center gap-5 text-sm sm:flex ml-10 md:gap-6"
             aria-label="Main"
           >
             <button

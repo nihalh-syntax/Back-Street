@@ -1,11 +1,21 @@
 // Hero Page is the main page of the website
 
+import { useId } from "react"
 import { Button } from "../ui/button"
 
 const HERO_IMAGE =
-  "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80"
+  "https://images.unsplash.com/photo-1619789332426-00fc137633d1?auto=format&fit=crop&w=800&q=80"
 
-// const HERO_IMAGE = "../assets/Hero.jpg"
+/** Single outline path — inner clip uses the same path scaled from center for even inset. */
+const FRAME_PATH =
+  "M52 96C28 188 18 292 42 384C66 476 148 508 246 502C344 496 398 448 412 356C426 264 408 172 372 92C336 12 248 -8 156 8C64 24 76 4 52 96Z"
+
+const VIEW_W = 420
+const VIEW_H = 520
+const CX = VIEW_W / 2
+const CY = VIEW_H / 2
+/** ~6% inset on all sides between stroke and photo (uniform scale from center). */
+const INNER_SCALE = 0.88
 
 function FourPointStar({ className }: { className?: string }) {
   return (
@@ -21,6 +31,8 @@ function FourPointStar({ className }: { className?: string }) {
 }
 
 const Hero = () => {
+  const clipId = useId().replace(/:/g, "")
+
   return (
     <section className="bg-[#f2f0f1]">
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-10 md:gap-12 md:px-6 md:py-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-16 lg:py-16">
@@ -36,7 +48,7 @@ const Hero = () => {
           <div>
             <Button
               asChild
-              className="h-12 rounded-full bg-foreground px-12 text-[0.95rem] font-medium text-background hover:bg-foreground/90"
+              className="h-12 rounded-full bg-foreground px-10 text-[0.95rem] font-medium text-background hover:bg-foreground/90"
             >
               <a href="#shop">Shop Now</a>
             </Button>
@@ -76,32 +88,39 @@ const Hero = () => {
 
           <div className="relative aspect-4/5 w-full sm:aspect-5/6">
             <svg
-              className="pointer-events-none absolute inset-[-2%] h-[104%] w-[104%] text-foreground"
-              viewBox="0 0 420 520"
-              fill="none"
+              className="h-full w-full text-foreground"
+              viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
+              preserveAspectRatio="xMidYMid meet"
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden
             >
+              <defs>
+                <clipPath id={clipId} clipPathUnits="userSpaceOnUse">
+                  <path
+                    transform={`translate(${CX} ${CY}) scale(${INNER_SCALE}) translate(${-CX} ${-CY})`}
+                    d={FRAME_PATH}
+                  />
+                </clipPath>
+              </defs>
+              <image
+                href={HERO_IMAGE}
+                x={0}
+                y={0}
+                width={VIEW_W}
+                height={VIEW_H}
+                preserveAspectRatio="xMidYMid slice"
+                clipPath={`url(#${clipId})`}
+              />
               <path
-                d="M52 96C28 188 18 292 42 384C66 476 148 508 246 502C344 496 398 448 412 356C426 264 408 172 372 92C336 12 248 -8 156 8C64 24 76 4 52 96Z"
+                d={FRAME_PATH}
+                fill="none"
                 stroke="currentColor"
-                strokeWidth="2.5"
+                strokeWidth={2.5}
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                fill="none"
+                vectorEffect="non-scaling-stroke"
               />
             </svg>
-            <div className="absolute inset-[5%] overflow-hidden rounded-[55%_45%_52%_48%/48%_52%_48%_52%]">
-              <img
-                src={HERO_IMAGE}
-                alt="Two models in layered streetwear and glasses"
-                className="h-full w-full object-cover object-[center_18%]"
-                width={900}
-                height={1080}
-                loading="eager"
-                decoding="async"
-              />
-            </div>
           </div>
         </div>
       </div>
