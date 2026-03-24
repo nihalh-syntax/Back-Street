@@ -1,3 +1,5 @@
+// Hero Page is the main page of the website
+
 import { Button } from "../ui/button"
 
 const HERO_IMAGE =
