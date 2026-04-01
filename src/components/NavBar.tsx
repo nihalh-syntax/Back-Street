@@ -8,7 +8,7 @@ const NavBar = () => {
   const { isSignedIn } = useAuth()
 
   return (
-    <header className="border-b border-border bg-[#f2f0f1]">
+    <header className="sticky top-0 z-50 border-b border-border bg-[#f2f0f1]/95 backdrop-blur supports-backdrop-filter:bg-[#f2f0f1]/80">
       <div className="mx-auto flex max-w-7xl items-center gap-6 px-4 py-3 md:gap-8 md:px-6">
         <div className="flex shrink-0 items-center gap-6 md:gap-8">
           <a href="/" className="text-lg font-bold tracking-tight text-foreground md:text-xl">
