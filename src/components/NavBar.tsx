@@ -1,9 +1,12 @@
 import { ChevronDown, Search, ShoppingCart, User } from "lucide-react"
+import { SignInButton, UserButton, useAuth } from "@clerk/react"
 
 const navLinkClass =
   "text-foreground hover:text-foreground/90 transition-colors text-sm font-medium whitespace-nowrap"
 
 const NavBar = () => {
+  const { isSignedIn } = useAuth()
+
   return (
     <header className="border-b border-border bg-[#f2f0f1]">
       <div className="mx-auto flex max-w-7xl items-center gap-6 px-4 py-3 md:gap-8 md:px-6">
@@ -55,13 +58,28 @@ const NavBar = () => {
           >
             <ShoppingCart className="size-5" strokeWidth={1.75} />
           </button>
-          <button
-            type="button"
-            className="inline-flex size-10 items-center justify-center rounded-full text-foreground transition-colors hover:bg-muted/80"
-            aria-label="Account"
-          >
-            <User className="size-5" strokeWidth={1.75} />
-          </button>
+
+          {isSignedIn ? (
+            <div className="inline-flex size-10 items-center justify-center">
+              <UserButton
+                appearance={{
+                  elements: {
+                    userButtonAvatarBox: "size-8",
+                  },
+                }}
+              />
+            </div>
+          ) : (
+            <SignInButton mode="modal">
+              <button
+                type="button"
+                className="inline-flex size-10 items-center justify-center rounded-full text-foreground transition-colors hover:bg-muted/80"
+                aria-label="Sign in"
+              >
+                <User className="size-5" strokeWidth={1.75} />
+              </button>
+            </SignInButton>
+          )}
         </div>
       </div>
     </header>
