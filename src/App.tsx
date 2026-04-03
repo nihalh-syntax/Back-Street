@@ -1,17 +1,26 @@
+import { Outlet, Route, Routes } from "react-router-dom"
+
 import NavBar from "./components/NavBar"
-import Hero from "./components/pages/Hero"
-import BrowseSection from "./components/BrowseSection"
-import NewArrivalsSection from "./components/NewArrivalsSection"
-import TopSellingSection from "./components/TopSellingSection"
-function App() {
+import HomePage from "./pages/HomePage"
+import ProductPage from "./pages/ProductPage"
+
+function Layout() {
   return (
     <>
       <NavBar />
-      <Hero />
-      <NewArrivalsSection />
-      <TopSellingSection />
-      <BrowseSection />
+      <Outlet />
     </>
+  )
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/product/:source/:id" element={<ProductPage />} />
+      </Route>
+    </Routes>
   )
 }
 

@@ -1,0 +1,202 @@
+import type { ProductItem } from "@/components/ProductCard"
+
+export type ProductSource = "newArrivals" | "topSelling"
+
+export type ProductColor = {
+  id: string
+  label: string
+  hex: string
+}
+
+export type ProductReview = {
+  id: string
+  author: string
+  verified: boolean
+  rating: number
+  text: string
+  date: string
+}
+
+export type ProductFAQ = {
+  question: string
+  answer: string
+}
+
+export type ProductDetailData = ProductItem & {
+  images: string[]
+  description: string
+  colors: ProductColor[]
+  sizes: string[]
+  reviews: ProductReview[]
+  faqs: ProductFAQ[]
+  detailBullets: string[]
+}
+
+const DEFAULT_COLORS: ProductColor[] = [
+  { id: "c1", label: "Olive", hex: "#5c6b4a" },
+  { id: "c2", label: "Navy", hex: "#1e3a5f" },
+  { id: "c3", label: "Black", hex: "#111111" },
+  { id: "c4", label: "White", hex: "#f4f4f5" },
+  { id: "c5", label: "Brown", hex: "#6b4423" },
+]
+
+const DEFAULT_SIZES = ["S", "M", "L", "XL", "XXL"] as const
+
+const SAMPLE_REVIEWS: ProductReview[] = [
+  {
+    id: "r1",
+    author: "Samantha D.",
+    verified: true,
+    rating: 5,
+    text: "Absolutely love this piece! The quality is outstanding and it fits perfectly. Highly recommend!",
+    date: "August 14, 2023",
+  },
+  {
+    id: "r2",
+    author: "Alex M.",
+    verified: true,
+    rating: 4,
+    text: "Great style and comfortable fabric. Shipping was quick. Would buy again.",
+    date: "August 10, 2023",
+  },
+  {
+    id: "r3",
+    author: "Jordan K.",
+    verified: false,
+    rating: 5,
+    text: "Perfect for everyday wear. True to size.",
+    date: "August 5, 2023",
+  },
+  {
+    id: "r4",
+    author: "Taylor R.",
+    verified: true,
+    rating: 4.5,
+    text: "Nice quality and looks exactly like the photos. Very happy with my purchase.",
+    date: "July 28, 2023",
+  },
+]
+
+const SAMPLE_FAQS: ProductFAQ[] = [
+  {
+    question: "What is your return policy?",
+    answer:
+      "You may return unworn items within 30 days of delivery for a full refund. Tags must be attached.",
+  },
+  {
+    question: "How do I care for this item?",
+    answer:
+      "Machine wash cold with like colors. Tumble dry low. Do not bleach. Iron on low if needed.",
+  },
+  {
+    question: "Is this true to size?",
+    answer:
+      "Yes — most customers find our fit consistent with standard US sizing. Check the size guide for measurements.",
+  },
+]
+
+export const NEW_ARRIVALS_FALLBACK: ProductItem[] = [
+  {
+    id: "fallback-1",
+    name: "T-shirt with Tape Details",
+    imageUrl:
+      "https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=700&q=80",
+    rating: 4.5,
+    price: 20,
+  },
+  {
+    id: "fallback-2",
+    name: "Skinny Fit Jeans",
+    imageUrl:
+      "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=700&q=80",
+    rating: 3.5,
+    price: 40,
+    originalPrice: 60,
+  },
+  {
+    id: "fallback-3",
+    name: "Checkered Shirt",
+    imageUrl:
+      "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=700&q=80",
+    rating: 4.5,
+    price: 80,
+  },
+  {
+    id: "fallback-4",
+    name: "Sleeve Striped T-shirt",
+    imageUrl:
+      "https://images.unsplash.com/photo-1581655353564-df123a1eb820?auto=format&fit=crop&w=700&q=80",
+    rating: 4.5,
+    price: 15,
+    originalPrice: 18,
+  },
+]
+
+export const TOP_SELLING_FALLBACK: ProductItem[] = [
+  {
+    id: "top-fallback-1",
+    name: "Vertical Striped Shirt",
+    imageUrl:
+      "https://images.unsplash.com/photo-1620012253295-c15cc3e65df4?auto=format&fit=crop&w=700&q=80",
+    rating: 5.0,
+    price: 100,
+    originalPrice: 140,
+  },
+  {
+    id: "top-fallback-2",
+    name: "Courage Graphic T-shirt",
+    imageUrl:
+      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80",
+    rating: 4.0,
+    price: 45,
+  },
+  {
+    id: "top-fallback-3",
+    name: "Loose Fit Bermuda Shorts",
+    imageUrl:
+      "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=700&q=80",
+    rating: 3.0,
+    price: 60,
+  },
+  {
+    id: "top-fallback-4",
+    name: "Faded Skinny Jeans",
+    imageUrl:
+      "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=700&q=80",
+    rating: 4.5,
+    price: 75,
+  },
+]
+
+export function findFallbackProduct(
+  source: ProductSource,
+  id: string,
+): ProductItem | null {
+  const list =
+    source === "newArrivals" ? NEW_ARRIVALS_FALLBACK : TOP_SELLING_FALLBACK
+  return list.find((p) => p.id === id) ?? null
+}
+
+export function buildProductDetail(item: ProductItem): ProductDetailData {
+  const img2 =
+    "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80"
+  const img3 =
+    "https://images.unsplash.com/photo-1618354691373-d851c564c113?auto=format&fit=crop&w=800&q=80"
+
+  return {
+    ...item,
+    images: [item.imageUrl, img2, img3],
+    description:
+      "This graphic t-shirt is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style. The vibrant graphic adds a touch of personality. Ideal for layering or wearing solo — durable stitching and a relaxed fit you will reach for again and again.",
+    colors: DEFAULT_COLORS,
+    sizes: [...DEFAULT_SIZES],
+    reviews: SAMPLE_REVIEWS,
+    faqs: SAMPLE_FAQS,
+    detailBullets: [
+      "Premium cotton blend for breathability and comfort",
+      "Reinforced seams for everyday durability",
+      "Machine washable — retains shape after washing",
+      "Designed for a relaxed, modern fit",
+    ],
+  }
+}

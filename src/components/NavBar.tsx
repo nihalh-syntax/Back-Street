@@ -1,5 +1,6 @@
 import { ChevronDown, Search, ShoppingCart, User } from "lucide-react"
 import { SignInButton, UserButton, useAuth } from "@clerk/react"
+import { Link } from "react-router-dom"
 
 const navLinkClass =
   "text-foreground hover:text-foreground/90 transition-colors text-sm font-medium whitespace-nowrap"
@@ -11,9 +12,12 @@ const NavBar = () => {
     <header className="sticky top-0 z-50 border-b border-border bg-[#f2f0f1]/95 backdrop-blur supports-backdrop-filter:bg-[#f2f0f1]/80">
       <div className="mx-auto flex max-w-7xl items-center gap-6 px-4 py-3 md:gap-8 md:px-6">
         <div className="flex shrink-0 items-center gap-6 md:gap-8">
-          <a href="/" className="text-lg font-bold tracking-tight text-foreground md:text-xl">
+          <Link
+            to="/"
+            className="text-lg font-bold tracking-tight text-foreground md:text-xl"
+          >
             BackStreet
-          </a>
+          </Link>
           <nav
             className="hidden items-center gap-5 text-sm sm:flex ml-10 md:gap-6"
             aria-label="Main"
