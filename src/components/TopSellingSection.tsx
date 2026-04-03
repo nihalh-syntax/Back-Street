@@ -4,42 +4,7 @@ import { collection, getDocs, limit, query } from "firebase/firestore"
 import { db } from "../../firebase/config"
 import ProductCard, { type ProductItem } from "./ProductCard"
 import { Button } from "./ui/button"
-
-const FALLBACK_PRODUCTS: ProductItem[] = [
-  {
-    id: "top-fallback-1",
-    name: "Vertical Striped Shirt",
-    imageUrl:
-      "https://images.unsplash.com/photo-1620012253295-c15cc3e65df4?auto=format&fit=crop&w=700&q=80",
-    rating: 5.0,
-    price: 100,
-    originalPrice: 140,
-  },
-  {
-    id: "top-fallback-2",
-    name: "Courage Graphic T-shirt",
-    imageUrl:
-      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80",
-    rating: 4.0,
-    price: 45,
-  },
-  {
-    id: "top-fallback-3",
-    name: "Loose Fit Bermuda Shorts",
-    imageUrl:
-      "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=700&q=80",
-    rating: 3.0,
-    price: 60,
-  },
-  {
-    id: "top-fallback-4",
-    name: "Faded Skinny Jeans",
-    imageUrl:
-      "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=700&q=80",
-    rating: 4.5,
-    price: 75,
-  },
-]
+import { TOP_SELLING_FALLBACK } from "@/data/productCatalog"
 
 type FirestoreProduct = {
   name?: string
@@ -93,7 +58,7 @@ const TopSellingSection = () => {
 
   const displayProducts = useMemo(() => {
     if (products.length > 0) return products.slice(0, 4)
-    return FALLBACK_PRODUCTS
+    return TOP_SELLING_FALLBACK
   }, [products])
 
   return (
@@ -105,7 +70,11 @@ const TopSellingSection = () => {
 
         <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {displayProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              href={`/product/topSelling/${encodeURIComponent(product.id)}`}
+            />
           ))}
         </div>
 

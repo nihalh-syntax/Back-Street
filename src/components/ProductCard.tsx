@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 import { Badge } from "@/components/ui/badge"
 import StarRating from "@/components/ui/StarRating"
 
@@ -12,9 +14,10 @@ export type ProductItem = {
 
 type ProductCardProps = {
   product: ProductItem
+  href?: string
 }
 
-const ProductCard = ({ product }: ProductCardProps) => {
+const ProductCard = ({ product, href }: ProductCardProps) => {
   const hasDiscount =
     typeof product.originalPrice === "number" &&
     product.originalPrice > product.price
@@ -23,14 +26,14 @@ const ProductCard = ({ product }: ProductCardProps) => {
     ? Math.round(((product.originalPrice! - product.price) / product.originalPrice!) * 100)
     : 0
 
-  return (
-    <article className="group flex min-w-0 flex-col gap-3">
+  const inner = (
+    <>
       <div className="overflow-hidden rounded-2xl bg-zinc-100">
         <img
           src={product.imageUrl}
           alt={product.name}
           loading="lazy"
-          className="aspect-[4/5] w-full object-contain p-4 transition-transform duration-300 group-hover:scale-[1.03]"
+          className="aspect-4/5 w-full object-contain p-4 transition-transform duration-300 group-hover:scale-[1.03]"
         />
       </div>
 
@@ -50,8 +53,21 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </>
         )}
       </div>
-    </article>
+    </>
   )
+
+  if (href) {
+    return (
+      <Link
+        to={href}
+        className="group flex min-w-0 flex-col gap-3 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      >
+        {inner}
+      </Link>
+    )
+  }
+
+  return <article className="group flex min-w-0 flex-col gap-3">{inner}</article>
 }
 
 export default ProductCard
