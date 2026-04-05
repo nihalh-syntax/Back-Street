@@ -17,6 +17,7 @@ import {
   NEW_ARRIVALS_FALLBACK,
   TOP_SELLING_FALLBACK,
 } from "@/data/productCatalog"
+import { useCart } from "@/context/CartContext"
 
 type TabId = "details" | "reviews" | "faqs"
 
@@ -38,6 +39,7 @@ function isProductSource(value: string | undefined): value is ProductSource {
 }
 
 const ProductPage = () => {
+  const { addItem } = useCart()
   const { source: sourceParam, id: idParam } = useParams<{
     source: string
     id: string
@@ -191,6 +193,26 @@ const ProductPage = () => {
 
   const mainImage = product.images[activeImage] ?? product.imageUrl
 
+  const selectedColor = product.colors.find((c) => c.id === selectedColorId)
+  const colorLabel = selectedColor?.label ?? product.colors[0]?.label ?? "—"
+  const sizeForCart = selectedSize ?? product.sizes[0] ?? ""
+
+  const handleAddToCart = () => {
+    if (!isProductSource(sourceParam) || !idParam) return
+    const colorId = selectedColorId ?? product.colors[0]?.id ?? "default"
+    addItem({
+      productId: idParam,
+      source: sourceParam,
+      name: product.name,
+      imageUrl: product.imageUrl,
+      unitPrice: product.price,
+      size: sizeForCart,
+      colorLabel,
+      colorId,
+      quantity,
+    })
+  }
+
   return (
     <div className="min-h-screen bg-[#f2f0f1] pb-16">
       <div className="mx-auto max-w-7xl px-4 py-6 md:px-6 md:py-8">
@@ -343,7 +365,11 @@ const ProductPage = () => {
                   +
                 </button>
               </div>
-              <Button className="h-11 flex-1 rounded-full px-8 text-sm font-semibold sm:max-w-md">
+              <Button
+                type="button"
+                className="h-11 flex-1 rounded-full px-8 text-sm font-semibold sm:max-w-md"
+                onClick={handleAddToCart}
+              >
                 Add to Cart
               </Button>
             </div>

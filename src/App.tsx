@@ -1,6 +1,7 @@
 import { Outlet, Route, Routes } from "react-router-dom"
 
 import NavBar from "./components/NavBar"
+import CartPage from "./pages/CartPage"
 import HomePage from "./pages/HomePage"
 import ProductPage from "./pages/ProductPage"
 
@@ -18,6 +19,7 @@ function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<HomePage />} />
+        <Route path="/cart" element={<CartPage />} />
         <Route path="/product/:source/:id" element={<ProductPage />} />
       </Route>
     </Routes>
