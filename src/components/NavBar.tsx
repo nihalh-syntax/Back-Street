@@ -2,11 +2,14 @@ import { ChevronDown, Search, ShoppingCart, User } from "lucide-react"
 import { SignInButton, UserButton, useAuth } from "@clerk/react"
 import { Link } from "react-router-dom"
 
+import { useCart } from "@/context/CartContext"
+
 const navLinkClass =
   "text-foreground hover:text-foreground/90 transition-colors text-sm font-medium whitespace-nowrap"
 
 const NavBar = () => {
   const { isSignedIn } = useAuth()
+  const { itemCount } = useCart()
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-[#f2f0f1]/95 backdrop-blur supports-backdrop-filter:bg-[#f2f0f1]/80">
@@ -55,13 +58,18 @@ const NavBar = () => {
         </div>
 
         <div className="flex shrink-0 items-center gap-2 md:gap-3">
-          <button
-            type="button"
-            className="inline-flex size-10 items-center justify-center rounded-full text-foreground transition-colors hover:bg-muted"
+          <Link
+            to="/cart"
+            className="relative inline-flex size-10 items-center justify-center rounded-full text-foreground transition-colors hover:bg-muted"
             aria-label="Shopping cart"
           >
             <ShoppingCart className="size-5" strokeWidth={1.75} />
-          </button>
+            {itemCount > 0 && (
+              <span className="absolute -right-0.5 -top-0.5 flex min-h-5 min-w-5 items-center justify-center rounded-full bg-foreground px-1 text-[10px] font-bold leading-none text-background">
+                {itemCount > 99 ? "99+" : itemCount}
+              </span>
+            )}
+          </Link>
 
           {isSignedIn ? (
             <div className="inline-flex size-10 items-center justify-center">
