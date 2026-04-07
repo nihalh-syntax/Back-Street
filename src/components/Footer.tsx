@@ -1,8 +1,238 @@
-// import React from 'react'
+import { useState } from "react"
+import { Link } from "react-router-dom"
+import { Facebook, Github, Instagram, Mail } from "lucide-react"
+
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { cn } from "@/lib/utils"
+
+const companyLinks = [
+  { label: "About", href: "#" },
+  { label: "Features", href: "#" },
+  { label: "Works", href: "#" },
+  { label: "Career", href: "#" },
+]
+
+const helpLinks = [
+  { label: "Customer Support", href: "#" },
+  { label: "Delivery Details", href: "#" },
+  { label: "Terms & Conditions", href: "#" },
+  { label: "Privacy Policy", href: "#" },
+]
+
+const faqLinks = [
+  { label: "Account", href: "#" },
+  { label: "Manage Deliveries", href: "#" },
+  { label: "Orders", href: "#" },
+  { label: "Payments", href: "#" },
+]
+
+const resourceLinks = [
+  { label: "Free eBooks", href: "#" },
+  { label: "Development Tutorial", href: "#" },
+  { label: "How to — Blog", href: "#" },
+  { label: "Youtube Playlist", href: "#" },
+]
+
+function XIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden
+    >
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  )
+}
 
 const Footer = () => {
+  const [email, setEmail] = useState("")
+
   return (
-    <div>Footer</div>
+    <footer className="mt-auto bg-[#f0f0f0] text-foreground">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
+        <div
+          className={cn(
+            "-mt-16 flex flex-col gap-8 rounded-3xl bg-black px-6 py-10 text-white md:-mt-20 md:flex-row md:items-center md:justify-between md:gap-10 md:px-10 md:py-12 lg:px-14",
+          )}
+        >
+          <h2 className="max-w-xl text-3xl font-black uppercase leading-tight tracking-tight md:text-4xl lg:text-[2.25rem]">
+            Stay upto date about our latest offers
+          </h2>
+          <div className="flex w-full max-w-md flex-col gap-3 md:shrink-0">
+            <div className="relative">
+              <Mail
+                className="pointer-events-none absolute left-4 top-1/2 size-5 -translate-y-1/2 text-zinc-500"
+                aria-hidden
+              />
+              <Input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email address"
+                className="h-12 rounded-full border-0 bg-white pl-12 pr-4 text-foreground placeholder:text-zinc-500"
+                aria-label="Email for newsletter"
+              />
+            </div>
+            <Button
+              type="button"
+              variant="secondary"
+              className="h-12 rounded-full bg-white font-semibold text-black hover:bg-zinc-100"
+              onClick={(e) => e.preventDefault()}
+            >
+              Subscribe to Newsletter
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-7xl px-4 pb-10 pt-16 sm:px-6 md:pt-20 lg:px-8">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-6 lg:gap-8">
+          <div className="sm:col-span-2 lg:col-span-2">
+            <Link
+              to="/"
+              className="text-2xl font-black tracking-tight text-foreground"
+            >
+              BackStreet
+            </Link>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-zinc-600">
+              We have clothes that suits your style and which you&apos;re proud
+              to wear. From women to men.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex size-10 items-center justify-center rounded-full border border-zinc-300 bg-white text-foreground transition-colors hover:bg-zinc-100"
+                aria-label="X"
+              >
+                <XIcon className="size-4" />
+              </a>
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex size-10 items-center justify-center rounded-full bg-black text-white transition-opacity hover:opacity-90"
+                aria-label="Facebook"
+              >
+                <Facebook className="size-4" strokeWidth={1.75} />
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex size-10 items-center justify-center rounded-full border border-zinc-300 bg-white text-foreground transition-colors hover:bg-zinc-100"
+                aria-label="Instagram"
+              >
+                <Instagram className="size-4" strokeWidth={1.75} />
+              </a>
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex size-10 items-center justify-center rounded-full border border-zinc-300 bg-white text-foreground transition-colors hover:bg-zinc-100"
+                aria-label="GitHub"
+              >
+                <Github className="size-4" strokeWidth={1.75} />
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-foreground">
+              Company
+            </h3>
+            <ul className="mt-4 space-y-3">
+              {companyLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-sm text-zinc-600 transition-colors hover:text-foreground"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-foreground">
+              Help
+            </h3>
+            <ul className="mt-4 space-y-3">
+              {helpLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-sm text-zinc-600 transition-colors hover:text-foreground"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-foreground">
+              FAQ
+            </h3>
+            <ul className="mt-4 space-y-3">
+              {faqLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-sm text-zinc-600 transition-colors hover:text-foreground"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-foreground">
+              Resources
+            </h3>
+            <ul className="mt-4 space-y-3">
+              {resourceLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-sm text-zinc-600 transition-colors hover:text-foreground"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-12 flex flex-col gap-6 border-t border-zinc-300 pt-8 md:flex-row md:items-center md:justify-between">
+          <p className="text-center text-sm text-zinc-600 md:text-left">
+            BackStreet © 2024–2026, All Rights Reserved
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-2 md:justify-end">
+            {["Visa", "Mastercard", "PayPal", "Apple Pay", "Google Pay"].map(
+              (name) => (
+                <span
+                  key={name}
+                  className="rounded-md border border-zinc-200 bg-white px-3 py-1.5 text-xs font-medium text-zinc-700 shadow-sm"
+                >
+                  {name}
+                </span>
+              ),
+            )}
+          </div>
+        </div>
+      </div>
+    </footer>
   )
 }
 
