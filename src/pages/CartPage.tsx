@@ -5,10 +5,11 @@ import { ArrowRight, ChevronRight, Tag, Trash2 } from "lucide-react"
 import { useCart } from "@/context/CartContext"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import {
+  computeOrderTotal,
+  SITE_DISCOUNT_PERCENT,
+} from "@/lib/orderTotals"
 import { cn } from "@/lib/utils"
-
-const SITE_DISCOUNT_PERCENT = 20
-const DELIVERY_FEE = 15
 
 function formatMoney(n: number) {
   return n.toLocaleString("en-US", {
@@ -31,21 +32,18 @@ const CartPage = () => {
 
   const [promoInput, setPromoInput] = useState("")
   const [promoMessage, setPromoMessage] = useState<string | null>(null)
+  const [checkoutLoading, setCheckoutLoading] = useState(false)
+  const [checkoutError, setCheckoutError] = useState<string | null>(null)
 
   const { subtotal, discount20, promoOff, delivery, total } = useMemo(() => {
-    const sub = items.reduce((acc, l) => acc + l.unitPrice * l.quantity, 0)
-    const d20 = sub * (SITE_DISCOUNT_PERCENT / 100)
-    const promo = appliedPromo ? Math.min(appliedPromo.discount, sub - d20) : 0
-    const del = items.length > 0 ? DELIVERY_FEE : 0
-    const tot = Math.max(0, sub - d20 - promo + del)
-    return {
-      subtotal: sub,
-      discount20: d20,
-      promoOff: promo,
-      delivery: del,
-      total: tot,
-    }
-  }, [items, appliedPromo])
+    return computeOrderTotal(
+      items.map((i) => ({
+        unitPrice: i.unitPrice,
+        quantity: i.quantity,
+      })),
+      appliedPromo?.code ?? null,
+    )
+  }, [items, appliedPromo?.code])
 
   const handleApplyPromo = () => {
     setPromoMessage(null)
@@ -59,6 +57,46 @@ const CartPage = () => {
       setPromoInput("")
     } else {
       setPromoMessage("Invalid code. Try SAVE10 or WELCOME.")
+    }
+  }
+
+  const checkoutApiBase = import.meta.env.VITE_CHECKOUT_API_URL ?? ""
+
+  const handleCheckout = async () => {
+    if (items.length === 0) return
+    setCheckoutError(null)
+    setCheckoutLoading(true)
+    try {
+      const res = await fetch(
+        `${checkoutApiBase}/api/create-checkout-session`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            items: items.map((i) => ({
+              unitPrice: i.unitPrice,
+              quantity: i.quantity,
+            })),
+            promoCode: appliedPromo?.code ?? null,
+          }),
+        },
+      )
+      const data = (await res.json().catch(() => ({}))) as {
+        error?: string
+        url?: string
+      }
+      if (!res.ok) {
+        throw new Error(data.error ?? "Checkout failed")
+      }
+      if (typeof data.url === "string" && data.url.length > 0) {
+        window.location.assign(data.url)
+        return
+      }
+      throw new Error("No checkout URL returned")
+    } catch (e) {
+      setCheckoutError(e instanceof Error ? e.message : "Checkout failed")
+    } finally {
+      setCheckoutLoading(false)
     }
   }
 
@@ -143,7 +181,7 @@ const CartPage = () => {
                       >
                         −
                       </button>
-                      <span className="min-w-[1.5rem] text-center tabular-nums">
+                      <span className="min-w-6 text-center tabular-nums">
                         {line.quantity}
                       </span>
                       <button
@@ -250,13 +288,23 @@ const CartPage = () => {
                   </p>
                 )}
 
+                {checkoutError && (
+                  <p className="mt-4 text-sm text-red-600" role="alert">
+                    {checkoutError}
+                  </p>
+                )}
+
                 <Button
                   type="button"
                   className="mt-6 h-12 w-full rounded-full text-base font-semibold"
                   size="lg"
+                  disabled={checkoutLoading}
+                  onClick={() => void handleCheckout()}
                 >
-                  Go to Checkout
-                  <ArrowRight className="ml-2 size-5" strokeWidth={2} />
+                  {checkoutLoading ? "Redirecting…" : "Go to Checkout"}
+                  {!checkoutLoading && (
+                    <ArrowRight className="ml-2 size-5" strokeWidth={2} />
+                  )}
                 </Button>
               </div>
             </aside>

@@ -9,6 +9,7 @@ import {
 } from "react"
 
 import type { ProductSource } from "@/data/productCatalog"
+import { promoDiscountFromCode } from "@/lib/orderTotals"
 
 const STORAGE_KEY = "backstreet-cart"
 
@@ -222,12 +223,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const applyPromo = useCallback((code: string) => {
     const normalized = code.trim().toUpperCase()
-    if (normalized === "SAVE10") {
-      setAppliedPromo({ code: "SAVE10", discount: 10 })
-      return true
-    }
-    if (normalized === "WELCOME") {
-      setAppliedPromo({ code: "WELCOME", discount: 15 })
+    const d = promoDiscountFromCode(normalized)
+    if (d > 0) {
+      setAppliedPromo({ code: normalized, discount: d })
       return true
     }
     return false
