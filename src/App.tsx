@@ -1,5 +1,6 @@
 import { Outlet, Route, Routes } from "react-router-dom"
 
+import Footer from "./components/Footer"
 import NavBar from "./components/NavBar"
 import CartPage from "./pages/CartPage"
 import CheckoutSuccessPage from "./pages/CheckoutSuccessPage"
@@ -8,10 +9,13 @@ import ProductPage from "./pages/ProductPage"
 
 function Layout() {
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <NavBar />
-      <Outlet />
-    </>
+      <main className="flex-1">
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
   )
 }
 
