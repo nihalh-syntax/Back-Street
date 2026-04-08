@@ -51,7 +51,7 @@ const Footer = () => {
   const [email, setEmail] = useState("")
 
   return (
-    <footer className="mt-auto bg-[#f0f0f0] text-foreground">
+    <footer className="mt-auto bg-muted/50 text-foreground">
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
         <div
           className={cn(
@@ -64,7 +64,7 @@ const Footer = () => {
           <div className="flex w-full max-w-md flex-col gap-3 md:shrink-0">
             <div className="relative">
               <Mail
-                className="pointer-events-none absolute left-4 top-1/2 size-5 -translate-y-1/2 text-zinc-500"
+                className="pointer-events-none absolute left-4 top-1/2 size-5 -translate-y-1/2 text-muted-foreground"
                 aria-hidden
               />
               <Input
@@ -72,14 +72,14 @@ const Footer = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email address"
-                className="h-12 rounded-full border-0 bg-white pl-12 pr-4 text-foreground placeholder:text-zinc-500"
+                className="h-12 rounded-full border-0 bg-white pl-12 pr-4 text-neutral-950 placeholder:text-neutral-500"
                 aria-label="Email for newsletter"
               />
             </div>
             <Button
               type="button"
               variant="secondary"
-              className="h-12 rounded-full bg-white font-semibold text-black hover:bg-zinc-100"
+              className="h-12 rounded-full bg-white font-semibold text-neutral-950 hover:bg-neutral-100"
               onClick={(e) => e.preventDefault()}
             >
               Subscribe to Newsletter
@@ -97,7 +97,7 @@ const Footer = () => {
             >
               BackStreet
             </Link>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-zinc-600">
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
               We have clothes that suits your style and which you&apos;re proud
               to wear. From women to men.
             </p>
@@ -106,7 +106,7 @@ const Footer = () => {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex size-10 items-center justify-center rounded-full border border-zinc-300 bg-white text-foreground transition-colors hover:bg-zinc-100"
+                className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:bg-muted"
                 aria-label="X"
               >
                 <XIcon className="size-4" />
@@ -124,7 +124,7 @@ const Footer = () => {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex size-10 items-center justify-center rounded-full border border-zinc-300 bg-white text-foreground transition-colors hover:bg-zinc-100"
+                className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:bg-muted"
                 aria-label="Instagram"
               >
                 <Instagram className="size-4" strokeWidth={1.75} />
@@ -133,7 +133,7 @@ const Footer = () => {
                 href="https://github.com"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex size-10 items-center justify-center rounded-full border border-zinc-300 bg-white text-foreground transition-colors hover:bg-zinc-100"
+                className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:bg-muted"
                 aria-label="GitHub"
               >
                 <Github className="size-4" strokeWidth={1.75} />
@@ -150,7 +150,7 @@ const Footer = () => {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-sm text-zinc-600 transition-colors hover:text-foreground"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {link.label}
                   </a>
@@ -168,7 +168,7 @@ const Footer = () => {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-sm text-zinc-600 transition-colors hover:text-foreground"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {link.label}
                   </a>
@@ -186,7 +186,7 @@ const Footer = () => {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-sm text-zinc-600 transition-colors hover:text-foreground"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {link.label}
                   </a>
@@ -204,7 +204,7 @@ const Footer = () => {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-sm text-zinc-600 transition-colors hover:text-foreground"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {link.label}
                   </a>
@@ -214,8 +214,8 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-6 border-t border-zinc-300 pt-8 md:flex-row md:items-center md:justify-between">
-          <p className="text-center text-sm text-zinc-600 md:text-left">
+        <div className="mt-12 flex flex-col gap-6 border-t border-border pt-8 md:flex-row md:items-center md:justify-between">
+          <p className="text-center text-sm text-muted-foreground md:text-left">
             BackStreet © 2024–2026, All Rights Reserved
           </p>
           <div className="flex flex-wrap items-center justify-center gap-2 md:justify-end">
@@ -223,7 +223,7 @@ const Footer = () => {
               (name) => (
                 <span
                   key={name}
-                  className="rounded-md border border-zinc-200 bg-white px-3 py-1.5 text-xs font-medium text-zinc-700 shadow-sm"
+                  className="rounded-md border border-border bg-card px-3 py-1.5 text-xs font-medium text-card-foreground shadow-sm"
                 >
                   {name}
                 </span>

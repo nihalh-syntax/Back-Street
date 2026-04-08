@@ -214,7 +214,7 @@ const ProductPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#f2f0f1] pb-16">
+    <div className="min-h-screen bg-background pb-16">
       <div className="mx-auto max-w-7xl px-4 py-6 md:px-6 md:py-8">
         <nav
           className="mb-8 flex flex-wrap items-center gap-1 text-sm text-muted-foreground"
@@ -240,7 +240,7 @@ const ProductPage = () => {
                   type="button"
                   onClick={() => setActiveImage(i)}
                   className={cn(
-                    "h-20 w-20 shrink-0 overflow-hidden rounded-xl border-2 bg-zinc-100 transition-colors md:h-24 md:w-24",
+                    "h-20 w-20 shrink-0 overflow-hidden rounded-xl border-2 bg-muted transition-colors md:h-24 md:w-24",
                     activeImage === i
                       ? "border-foreground"
                       : "border-transparent hover:border-border",
@@ -254,7 +254,7 @@ const ProductPage = () => {
                 </button>
               ))}
             </div>
-            <div className="min-h-[320px] flex-1 overflow-hidden rounded-2xl bg-zinc-100 sm:min-h-[420px]">
+            <div className="min-h-[320px] flex-1 overflow-hidden rounded-2xl bg-muted sm:min-h-[420px]">
               <img
                 src={mainImage}
                 alt={product.name}
@@ -333,7 +333,7 @@ const ProductPage = () => {
                         "min-w-[3.25rem] rounded-full border px-4 py-2 text-sm font-medium transition-colors",
                         selected
                           ? "border-foreground bg-foreground text-background"
-                          : "border-border bg-zinc-100 text-foreground hover:bg-zinc-200",
+                          : "border-border bg-muted text-foreground hover:bg-muted/80",
                       )}
                     >
                       {size}
@@ -344,7 +344,7 @@ const ProductPage = () => {
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <div className="inline-flex h-11 items-center justify-between gap-4 rounded-full bg-zinc-100 px-4 text-sm font-medium">
+              <div className="inline-flex h-11 items-center justify-between gap-4 rounded-full bg-muted px-4 text-sm font-medium">
                 <button
                   type="button"
                   className="text-lg"

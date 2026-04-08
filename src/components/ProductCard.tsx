@@ -28,7 +28,7 @@ const ProductCard = ({ product, href }: ProductCardProps) => {
 
   const inner = (
     <>
-      <div className="overflow-hidden rounded-2xl bg-zinc-100">
+      <div className="overflow-hidden rounded-2xl bg-muted">
         <img
           src={product.imageUrl}
           alt={product.name}

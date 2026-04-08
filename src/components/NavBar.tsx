@@ -2,6 +2,7 @@ import { ChevronDown, Search, ShoppingCart, User } from "lucide-react"
 import { SignInButton, UserButton, useAuth } from "@clerk/react"
 import { Link } from "react-router-dom"
 
+import ModeToggle from "./ModeToggle"
 import { useCart } from "@/context/CartContext"
 
 const navLinkClass =
@@ -12,7 +13,7 @@ const NavBar = () => {
   const { itemCount } = useCart()
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-[#f2f0f1]/95 backdrop-blur supports-backdrop-filter:bg-[#f2f0f1]/80">
+    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80">
       <div className="mx-auto flex max-w-7xl items-center gap-6 px-4 py-3 md:gap-8 md:px-6">
         <div className="flex shrink-0 items-center gap-6 md:gap-8">
           <Link
@@ -44,17 +45,19 @@ const NavBar = () => {
           </nav>
         </div>
 
-        <div className="relative min-w-0 flex-1">
-          <Search
-            className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
-            aria-hidden
-          />
-          <input
-            type="search"
-            placeholder="Search for products..."
-            className="h-10 w-full rounded-full border-0 bg-muted py-2 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-            aria-label="Search for products"
-          />
+        <div className="flex min-w-0 flex-1 items-center gap-1 sm:gap-2">
+          <div className="relative min-w-0 flex-1">
+            <Search
+              className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
+              aria-hidden
+            />
+            <input
+              type="search"
+              placeholder="Search for products..."
+              className="h-10 w-full rounded-full border-0 bg-muted py-2 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+              aria-label="Search for products"
+            />
+          </div>
         </div>
 
         <div className="flex shrink-0 items-center gap-2 md:gap-3">
@@ -70,6 +73,8 @@ const NavBar = () => {
               </span>
             )}
           </Link>
+
+          <ModeToggle />
 
           {isSignedIn ? (
             <div className="inline-flex size-10 items-center justify-center">

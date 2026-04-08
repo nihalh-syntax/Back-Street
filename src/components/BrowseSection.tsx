@@ -69,7 +69,7 @@ const DressStyleCard = ({ style }: DressStyleCardProps) => {
     <a
       href={style.href}
       className={cn(
-        "group relative block overflow-hidden rounded-2xl bg-zinc-100",
+        "group relative block overflow-hidden rounded-2xl bg-muted",
         style.cardHeightClass ?? "h-52 md:h-56",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
         style.className,
@@ -95,9 +95,9 @@ const DressStyleCard = ({ style }: DressStyleCardProps) => {
 
 const BrowseSection = () => {
   return (
-    <section className="bg-[#f2f0f1] pb-24 md:pb-32">
+    <section className="bg-background pb-24 md:pb-32">
       <div className="mx-auto max-w-7xl px-4 md:px-6">
-        <div className="rounded-4xl bg-zinc-200 px-6 py-10 md:px-9 md:py-12">
+        <div className="rounded-4xl bg-muted px-6 py-10 md:px-9 md:py-12">
           <h2 className="text-center text-4xl font-black uppercase tracking-tight text-foreground md:text-5xl">
             Browse by Dress Style
           </h2>

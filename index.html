@@ -2,6 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      (function () {
+        var k = "backstreet-theme-v2";
+        try {
+          var v = localStorage.getItem(k);
+          var root = document.documentElement;
+          if (v === "light") root.classList.remove("dark");
+          else root.classList.add("dark");
+        } catch (_) {}
+      })();
+    </script>
     <link rel="icon" type="image/png" href="/Logo.png" />
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
     <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
