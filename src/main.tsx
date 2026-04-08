@@ -5,6 +5,7 @@ import "./index.css"
 import App from "./App.tsx"
 import { AuthProvider } from "./context/AuthContext.tsx"
 import { CartProvider } from "./context/CartContext.tsx"
+import { AppThemeProvider } from "@/theme"
 
 const clerkPublishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 if (!clerkPublishableKey) {
@@ -14,13 +15,15 @@ if (!clerkPublishableKey) {
 }
 
 createRoot(document.getElementById("root")!).render(
-  <ClerkProvider publishableKey={clerkPublishableKey}>
-    <BrowserRouter>
-      <AuthProvider>
-        <CartProvider>
-          <App />
-        </CartProvider>
-      </AuthProvider>
-    </BrowserRouter>
-  </ClerkProvider>,
+  <AppThemeProvider>
+    <ClerkProvider publishableKey={clerkPublishableKey}>
+      <BrowserRouter>
+        <AuthProvider>
+          <CartProvider>
+            <App />
+          </CartProvider>
+        </AuthProvider>
+      </BrowserRouter>
+    </ClerkProvider>
+  </AppThemeProvider>,
 )

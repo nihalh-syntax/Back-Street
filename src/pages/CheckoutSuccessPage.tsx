@@ -7,7 +7,7 @@ const CheckoutSuccessPage = () => {
   const sessionId = params.get("session_id")
 
   return (
-    <div className="mx-auto max-w-lg px-4 py-20 text-center">
+    <div className="mx-auto max-w-lg bg-background px-4 py-20 text-center">
       <h1 className="text-2xl font-black uppercase tracking-tight text-foreground">
         Thank you
       </h1>

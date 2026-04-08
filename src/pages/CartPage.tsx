@@ -101,7 +101,7 @@ const CartPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#f2f0f1] pb-16">
+    <div className="min-h-screen bg-background pb-16">
       <div className="mx-auto max-w-7xl px-4 py-6 md:px-6 md:py-8">
         <nav
           className="mb-8 flex flex-wrap items-center gap-1 text-sm text-muted-foreground"
@@ -145,7 +145,7 @@ const CartPage = () => {
                     <Trash2 className="size-5" strokeWidth={1.75} />
                   </button>
 
-                  <div className="overflow-hidden rounded-xl bg-zinc-100 sm:row-span-2">
+                  <div className="overflow-hidden rounded-xl bg-muted sm:row-span-2">
                     <img
                       src={line.imageUrl}
                       alt=""
@@ -170,7 +170,7 @@ const CartPage = () => {
 
                   <div className="flex items-end justify-end sm:col-span-1 sm:row-span-2 sm:flex-col sm:items-end sm:justify-between">
                     <span className="sr-only sm:not-sr-only sm:h-6" />
-                    <div className="inline-flex h-10 items-center justify-between gap-4 rounded-full bg-zinc-100 px-3 text-sm font-medium">
+                    <div className="inline-flex h-10 items-center justify-between gap-4 rounded-full bg-muted px-3 text-sm font-medium">
                       <button
                         type="button"
                         className="px-1 text-lg leading-none"

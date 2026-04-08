@@ -11,7 +11,7 @@ function Layout() {
   return (
     <div className="flex min-h-screen flex-col">
       <NavBar />
-      <main className="flex-1">
+      <main className="flex-1 bg-background">
         <Outlet />
       </main>
       <Footer />
