@@ -235,7 +235,10 @@ const Hero = () => {
   const clipId = useId().replace(/:/g, "")
 
   return (
-    <section className="bg-background">
+    <section
+      id="shop"
+      className="scroll-mt-24 bg-background"
+    >
       <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 pb-2 pt-8 md:gap-10 md:px-6 md:pb-3 md:pt-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-12 lg:pb-3 lg:pt-12">
         <div className="flex flex-col gap-6 md:gap-8">
           <h1 className="max-w-xl font-sans text-[2.25rem] font-black uppercase leading-[1.05] tracking-tight text-foreground sm:text-5xl md:text-[3.25rem] lg:text-[3.5rem]">
@@ -251,7 +254,7 @@ const Hero = () => {
               asChild
               className="h-12 rounded-full bg-foreground px-10 text-[0.95rem] font-medium text-background hover:bg-foreground/90"
             >
-              <a href="#shop">Shop Now</a>
+              <a href="#new-arrivals">Shop Now</a>
             </Button>
           </div>
 

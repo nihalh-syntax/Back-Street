@@ -1,6 +1,6 @@
-import { ChevronDown, Search, ShoppingCart, User } from "lucide-react"
+import { Search, ShoppingCart, User } from "lucide-react"
 import { SignInButton, UserButton, useAuth } from "@clerk/react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import ModeToggle from "./ModeToggle"
 import { useCart } from "@/context/CartContext"
@@ -8,9 +8,23 @@ import { useCart } from "@/context/CartContext"
 const navLinkClass =
   "text-foreground hover:text-foreground/90 transition-colors text-sm font-medium whitespace-nowrap"
 
+const SECTION_IDS = {
+  shop: "shop",
+  newArrivals: "new-arrivals",
+  topSelling: "top-selling",
+  browseByStyle: "browse-by-style",
+} as const
+
 const NavBar = () => {
   const { isSignedIn } = useAuth()
   const { itemCount } = useCart()
+  const navigate = useNavigate()
+
+  const goToHomeSection =
+    (sectionId: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+      e.preventDefault()
+      void navigate({ pathname: "/", hash: sectionId })
+    }
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80">
@@ -23,23 +37,35 @@ const NavBar = () => {
             BackStreet
           </Link>
           <nav
-            className="hidden items-center gap-5 text-sm sm:flex ml-10 md:gap-6"
+            className="ml-10 hidden items-center gap-5 text-sm sm:flex md:gap-6"
             aria-label="Main"
           >
-            <button
-              type="button"
-              className={`${navLinkClass} inline-flex items-center gap-1`}
+            <a
+              href={`/#${SECTION_IDS.shop}`}
+              onClick={goToHomeSection(SECTION_IDS.shop)}
+              className={navLinkClass}
             >
               Shop
-              <ChevronDown className="size-3.5 opacity-70" aria-hidden />
-            </button>
-            <a href="#" className={navLinkClass}>
+            </a>
+            <a
+              href={`/#${SECTION_IDS.newArrivals}`}
+              onClick={goToHomeSection(SECTION_IDS.newArrivals)}
+              className={navLinkClass}
+            >
               New Arrivals
             </a>
-            <a href="#" className={navLinkClass}>
+            <a
+              href={`/#${SECTION_IDS.topSelling}`}
+              onClick={goToHomeSection(SECTION_IDS.topSelling)}
+              className={navLinkClass}
+            >
               Top Selling
             </a>
-            <a href="#" className={navLinkClass}>
+            <a
+              href={`/#${SECTION_IDS.browseByStyle}`}
+              onClick={goToHomeSection(SECTION_IDS.browseByStyle)}
+              className={navLinkClass}
+            >
               Browse by Style
             </a>
           </nav>
@@ -58,6 +84,7 @@ const NavBar = () => {
               aria-label="Search for products"
             />
           </div>
+          <ModeToggle />
         </div>
 
         <div className="flex shrink-0 items-center gap-2 md:gap-3">
@@ -73,8 +100,6 @@ const NavBar = () => {
               </span>
             )}
           </Link>
-
-          <ModeToggle />
 
           {isSignedIn ? (
             <div className="inline-flex size-10 items-center justify-center">
