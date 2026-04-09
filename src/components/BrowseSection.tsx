@@ -16,7 +16,7 @@ const DRESS_STYLES: DressStyle[] = [
     title: "Casual",
     href: "#casual",
     imageUrl:
-      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80",
     className: "md:col-span-2",
     cardHeightClass: "h-52 md:h-56",
   },
@@ -86,7 +86,14 @@ const DressStyleCard = ({ style }: DressStyleCardProps) => {
         )}
       />
       <div className="absolute inset-0 bg-linear-to-r from-black/15 to-transparent" />
-      <span className="absolute left-5 top-4 text-3xl font-bold text-black md:text-[2rem]">
+      <span
+        className={cn(
+          "absolute left-5 top-4 text-3xl font-bold md:text-[2rem]",
+          "text-neutral-900 dark:text-white",
+          "drop-shadow-[0_1px_3px_rgba(0,0,0,0.35)]",
+          "dark:drop-shadow-[0_2px_8px_rgba(0,0,0,0.75)]",
+        )}
+      >
         {style.title}
       </span>
     </a>
