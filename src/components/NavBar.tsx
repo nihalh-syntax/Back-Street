@@ -34,13 +34,13 @@ const NavBar = () => {
               <ChevronDown className="size-3.5 opacity-70" aria-hidden />
             </button>
             <a href="#" className={navLinkClass}>
-              On Sale
-            </a>
-            <a href="#" className={navLinkClass}>
               New Arrivals
             </a>
             <a href="#" className={navLinkClass}>
-              Brands
+              Top Selling
+            </a>
+            <a href="#" className={navLinkClass}>
+              Browse by Style
             </a>
           </nav>
         </div>
