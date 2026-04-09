@@ -1,7 +1,6 @@
 import { Search, ShoppingCart, User } from "lucide-react"
 import { SignInButton, UserButton, useAuth } from "@clerk/react"
 import { Link, useNavigate } from "react-router-dom"
-
 import ModeToggle from "./ModeToggle"
 import { useCart } from "@/context/CartContext"
 
@@ -71,23 +70,21 @@ const NavBar = () => {
           </nav>
         </div>
 
-        <div className="flex min-w-0 flex-1 items-center gap-1 sm:gap-2">
-          <div className="relative min-w-0 flex-1">
-            <Search
-              className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
-              aria-hidden
-            />
-            <input
-              type="search"
-              placeholder="Search for products..."
-              className="h-10 w-full rounded-full border-0 bg-muted py-2 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-              aria-label="Search for products"
-            />
-          </div>
-          <ModeToggle />
+        <div className="relative min-w-0 flex-1">
+          <Search
+            className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
+            aria-hidden
+          />
+          <input
+            type="search"
+            placeholder="Search for products..."
+            className="h-10 w-full rounded-full border-0 bg-muted py-2 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+            aria-label="Search for products"
+          />
         </div>
 
         <div className="flex shrink-0 items-center gap-2 md:gap-3">
+          <ModeToggle />
           <Link
             to="/cart"
             className="relative inline-flex size-10 items-center justify-center rounded-full text-foreground transition-colors hover:bg-muted"
