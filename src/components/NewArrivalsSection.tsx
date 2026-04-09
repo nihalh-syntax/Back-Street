@@ -62,7 +62,10 @@ const NewArrivalsSection = () => {
   }, [products])
 
   return (
-    <section className="bg-background">
+    <section
+      id="new-arrivals"
+      className="scroll-mt-24 bg-background"
+    >
       <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-14">
         <h2 className="text-center text-4xl font-black uppercase tracking-tight text-foreground md:text-5xl">
           New Arrivals

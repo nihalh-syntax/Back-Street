@@ -102,7 +102,10 @@ const DressStyleCard = ({ style }: DressStyleCardProps) => {
 
 const BrowseSection = () => {
   return (
-    <section className="bg-background pb-24 md:pb-32">
+    <section
+      id="browse-by-style"
+      className="scroll-mt-24 bg-background pb-24 md:pb-32"
+    >
       <div className="mx-auto max-w-7xl px-4 md:px-6">
         <div className="rounded-4xl bg-muted px-6 py-10 md:px-9 md:py-12">
           <h2 className="text-center text-4xl font-black uppercase tracking-tight text-foreground md:text-5xl">

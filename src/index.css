@@ -126,7 +126,8 @@
     }
   html {
     @apply font-sans;
-    }
+    scroll-behavior: smooth;
+  }
 }
 
 @keyframes brand-marquee {
