@@ -5,7 +5,9 @@ import NavBar from "./components/NavBar"
 import CartPage from "./pages/CartPage"
 import CheckoutSuccessPage from "./pages/CheckoutSuccessPage"
 import HomePage from "./pages/HomePage"
+import NewArrivalsPage from "./pages/NewArrivalsPage"
 import ProductPage from "./pages/ProductPage"
+import TopSellingPage from "./pages/TopSellingPage"
 
 function Layout() {
   return (
@@ -24,6 +26,8 @@ function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<HomePage />} />
+        <Route path="/arrivals" element={<NewArrivalsPage />} />
+        <Route path="/top-selling" element={<TopSellingPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout/success" element={<CheckoutSuccessPage />} />
         <Route path="/product/:source/:id" element={<ProductPage />} />
