@@ -1,9 +1,18 @@
+/// <reference types="vite/client" />
+
 import { initializeApp } from "firebase/app"
 import { getAuth } from "firebase/auth"
 import { getFirestore } from "firebase/firestore"
 
+const apiKey = import.meta.env.VITE_FIREBASE_API_KEY
+if (!apiKey) {
+  throw new Error(
+    "Missing VITE_FIREBASE_API_KEY. Add it to src/.env.local (see Vite envDir).",
+  )
+}
+
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  apiKey,
   authDomain: "backstreet-2dd6c.firebaseapp.com",
   projectId: "backstreet-2dd6c",
   storageBucket: "backstreet-2dd6c.firebasestorage.app",
