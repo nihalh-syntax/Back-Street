@@ -8,8 +8,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // https://vite.dev/config/
 export default defineConfig({
-  // Load `.env*` from `src/` (project convention) — Vite default is repo root only.
-  envDir: path.resolve(__dirname, "src"),
+  // Load `.env*` from project root (e.g. `.env.local` next to this file).
+  envDir: path.resolve(__dirname),
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
