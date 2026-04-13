@@ -7,7 +7,7 @@ import { getFirestore } from "firebase/firestore"
 // const apiKey = import.meta.env.VITE_FIREBASE_API_KEY
 // if (!apiKey) {
 //   throw new Error(
-//     "Missing VITE_FIREBASE_API_KEY. Add it to src/.env.local (see Vite envDir).",
+//     "Missing VITE_FIREBASE_API_KEY. Add it to `.env.local` in the project root.",
 //   )
 // }
 

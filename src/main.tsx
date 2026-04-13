@@ -10,7 +10,7 @@ import { AppThemeProvider } from "@/theme"
 const clerkPublishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 if (!clerkPublishableKey) {
   throw new Error(
-    "Missing VITE_CLERK_PUBLISHABLE_KEY. Add it to .env.local (see Vite envDir in vite.config).",
+    "Missing VITE_CLERK_PUBLISHABLE_KEY. Add it to `.env.local` in the project root (Back-Street/).",
   )
 }
 

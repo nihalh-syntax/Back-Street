@@ -13,8 +13,9 @@ import {
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-dotenv.config({ path: path.resolve(__dirname, "../src/.env.local") })
+dotenv.config({ path: path.resolve(__dirname, "../.env.local") })
 dotenv.config({ path: path.resolve(__dirname, "../.env") })
+dotenv.config({ path: path.resolve(__dirname, "../src/.env.local") })
 
 const clientOrigin = process.env.CLIENT_ORIGIN ?? "http://localhost:5173"
 const port = Number(process.env.CHECKOUT_API_PORT) || 4242
